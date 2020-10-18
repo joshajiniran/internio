@@ -1,0 +1,51 @@
+{% extends 'pages/master.html' %}
+{% load static %}
+{% block content %}
+
+
+    {% block hero %}
+        {% include 'pages/hero.html' %}
+    {% endblock %}
+
+    <section class="ftco-section bg-light">
+      <div class="container">
+        <div class="row d-flex">
+        {% for blog_post in blog_posts %}
+          <div class="col-md-3 d-flex ftco-animate">
+            <div class="blog-entry align-self-stretch">
+              <a href="{% url 'singlepost' blog_post.slug %}" class="block-20" style="background-image: url({{ blog_post.feature_image.url }});">
+              </a>
+              <div class="text mt-3">
+              	<div class="meta mb-2">
+                  <div><a href="{% url 'singlepost' blog_post.slug %}">{{ blog_post.created_on }}</a></div>
+                  <div><a href="{% url 'singlepost' blog_post.slug %}">{{ blog_post.author }}</a></div>
+                  <div><a href="{% url 'singlepost' blog_post.slug %}" class="meta-chat"><span class="icon-chat"></span> {{ blog_post.comment_count }}</a></div>
+                </div>
+                <h3 class="heading"><a href="{% url 'singlepost' blog_post.slug %}">{{ blog_post.title }}</a></h3>
+               <p>{{ blog_post.body }}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          
+        </div>
+        <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul>
+                <li><a href="#">&lt;</a></li>
+                <li class="active"><span>1</span></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&gt;</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+{% endblock %}
