@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from django.contrib import messages
-from .models import Contact, Job, BlogPost
+from .models import Contact, Job, BlogPost, Company
 from .forms import ContactForm, JobForm, EmailSubscriptionForm
 # Create your views here.
 
@@ -10,7 +10,8 @@ from .forms import ContactForm, JobForm, EmailSubscriptionForm
 
 def IndexPage(request):
     blog_posts = BlogPost.objects.filter(status=1).order_by('-created_on')[:4]
-    context_object_name = {'blog_posts':blog_posts}
+    jobs = Job.objects.all().order_by('-date_created')
+    context_object_name = {'blog_posts':blog_posts, 'jobs':jobs}
     return render(request, 'pages/index.html', context_object_name)
 
 
@@ -46,7 +47,9 @@ def SingleBlogPost(request, slug):
     recents = BlogPost.objects.filter(status=1).order_by('-created_on')[:3]
 
     return render(request, 'pages/blog-single.html', {'blog_post':blog_post, 'recents': recents})
-
+def SingleJob(request, pk):
+    job = get_object_or_404(Job, pk=pk)
+    return render(request, 'pages/job-single.html', {'job':job})
 def NewPost(request):
     if request.method == "POST":
         form = JobForm(request.POST)
@@ -68,5 +71,12 @@ def EmailSubscribe(request):
         form = EmailSubscriptionForm()
         return render(request, 'pages/master.html',{'f':form})
 
+def CompaniesList(request):
+    companies = Company.objects.filter(verified=True)
+    return render(request, 'pages/companies.html', {'companies': companies})
 
+
+def SingleCompanyDetail(request, pk):
+    company = get_object_or_404(Company, pk=pk)
+    return render(request, 'pages/company-single.html', {'company':company})
 

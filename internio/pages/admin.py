@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contact, Job, EmailSubscription, BlogPost, Categories
+from .models import Contact, Job, EmailSubscription, BlogPost, Category, Company
 # Register your models here.
 
 @admin.register(Contact)
@@ -20,9 +20,11 @@ class JobAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'company',
+        'category',
         'job_type',
         'location',
         'description',
+        'job_company_image',
         'date_created'
     )
 
@@ -65,12 +67,36 @@ class BlogPostAdmin(admin.ModelAdmin):
 
 
 
-@admin.register(Categories)
-class CategoriesAdmin(admin.ModelAdmin):
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         'title',
-        'date_created',
-        'jobs'
+        'date_created'
     )
-    list_filter = ('title', 'date_created', 'jobs')
-    search_fields = ('title', 'date_created', 'jobs')
+    list_filter = ('title', 'date_created')
+    search_fields = ('title', 'date_created')
+
+
+@admin.register(Company)
+class CompanyAdmin(admin.ModelAdmin):
+    list_display = (
+        'company_name',
+        'company_phone',
+        'company_email',
+        'company_location',
+        'company_company_image',
+        'company_date_created',
+        'verified'
+    )
+
+    list_filter = ('company_name', 'company_email', 'company_location', 'company_date_created', 'verified')
+    search_fields = ('company_name', 'company_email', 'company_location', 'company_date_created', 'verified')
+
+    actions = ['verify_company']
+
+
+    def verify_company(self, request, queryset):
+        queryset.update(verified=True)
+
+
+

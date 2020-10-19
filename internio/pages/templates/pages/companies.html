@@ -1,0 +1,52 @@
+{% extends 'pages/master.html' %}
+{% load static %}
+{% block content %}
+
+
+    {% block hero %}
+        {% include 'pages/hero.html' %}
+    {% endblock %}
+
+    <section class="ftco-section bg-light">
+            <h2 class="text-center mb-4">All Companies</h2>
+      <div class="container">
+        <div class="row d-flex">
+        {% for company in companies %}
+          <div class="col-md-3 d-flex ftco-animate">
+            <div class="blog-entry align-self-stretch">
+              <a href="{% url 'company-detail' company.id %}" class="block-20" style="background-image: url({{ company.company_company_image.url }});">
+              </a>
+              <div class="text mt-3">
+              	<div class="meta mb-2">
+                  <div><a href="{% url 'company-detail' company.id %}">{{ company.company_date_created }}</a></div>
+                  <div><a href="{% url 'company-detail' company.id %}">{{ company.company_location }}</a></div>
+                  <div><a href="{% url 'company-detail' company.id %}" class="meta-chat"><span class="icon-chat"></span></a></div>
+                </div>
+                <h3 class="heading"><a href="{% url 'company-detail' company.id %}">{{ company.company_name }}</a></h3>
+               {% comment %} <p>{{ blog_post.body }}</p> {% endcomment %}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          
+        </div>
+        <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul>
+                <li><a href="#">&lt;</a></li>
+                <li class="active"><span>1</span></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&gt;</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+{% endblock %}

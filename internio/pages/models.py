@@ -24,7 +24,7 @@ class Contact(models.Model):
     date_created = models.DateField(auto_now_add=True)
 
     class Meta:
-        verbose_name_plural = ['Contacts']
+        verbose_name_plural = 'Contacts'
 
     def __str__(self):
         return '{} {} {}'.format(self.name, self.email, self.subject)
@@ -32,11 +32,12 @@ class Contact(models.Model):
 
 class Job(models.Model):
     title = models.CharField(max_length=100)
-    company = models.CharField(max_length=100)
-    category = models.ForeignKey('Categories', on_delete=models.CASCADE, related_name='+')
+    company = models.ForeignKey('Company', on_delete=models.CASCADE, related_name='job')
+    category = models.ForeignKey('Category', on_delete=models.CASCADE)
     job_type = models.CharField(max_length=100, choices=CATEGORIES, default="Permanent")
     location = models.CharField(max_length=100)
     description = models.TextField()
+    job_company_image = models.FileField(upload_to='gallery/job-cover-images', null=True)
     date_created = models.DateField(auto_now_add=True)
 
     class Meta:
@@ -46,24 +47,38 @@ class Job(models.Model):
     def __str__(self):        
         return '{} {} {} '.format(self.title, self.company, self.location)
 
-class Categories(models.Model):
+class Category(models.Model):
     title = models.CharField(max_length=100)
     date_created = models.DateField(auto_now_add=True)
-    jobs = models.ForeignKey(Job, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['-date_created']
-
+        verbose_name_plural = 'Categories'
     def __str__(self):
         return '{}'.format(self.title)
 
+class Company(models.Model):
+    company_name = models.CharField(max_length=100, unique=True)
+    company_phone = models.CharField(max_length=13)
+    company_email = models.CharField(max_length=100)
+    company_location = models.CharField(max_length=100)
+    company_company_image = models.FileField(upload_to='gallery/companies')
+    company_date_created = models.DateField(auto_now_add=True)
+    verified = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['company_name']
+        verbose_name_plural = 'Companies'
+
+    def __str__(self):
+        return '{}'.format(self.company_name)
 
 class EmailSubscription(models.Model):
     email = models.CharField(max_length=100)
     date_subscribed = models.DateField(auto_now_add=True)
 
     class Meta:
-        verbose_name_plural = ['Email Subscription Lists']
+        verbose_name_plural = 'Email Subscription Lists'
 
     def __str__(self):      
         return '{}'.format(self.email)        
