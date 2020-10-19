@@ -22,7 +22,7 @@
                   <div><a href="{% url 'singlepost' blog_post.slug %}" class="meta-chat"><span class="icon-chat"></span> {{ blog_post.comment_count }}</a></div>
                 </div>
                 <h3 class="heading"><a href="{% url 'singlepost' blog_post.slug %}">{{ blog_post.title }}</a></h3>
-               <p>{{ blog_post.body }}</p>
+               <p>{{ blog_post.body|truncatechars:156 }}</p>
               </div>
             </div>
           </div>

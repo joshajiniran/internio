@@ -10,5 +10,5 @@ urlpatterns = [
     path('newpost', views.NewPost, name='newpost'),
     path('jobs/<int:pk>/', views.SingleJob, name='job-detail'),
     path('companies', views.CompaniesList, name='companies'),
-    path('companies/<int:pk>', views.SingleCompanyDetail, name='company-detail'),
+    path('companies/<int:pk>/<slug:slug>/', views.SingleCompanyDetail, name='company-detail'),
 ]

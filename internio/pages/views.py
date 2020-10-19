@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views import generic
 from django.contrib import messages
 from .models import Contact, Job, BlogPost, Company
@@ -11,7 +12,18 @@ from .forms import ContactForm, JobForm, EmailSubscriptionForm
 def IndexPage(request):
     blog_posts = BlogPost.objects.filter(status=1).order_by('-created_on')[:4]
     jobs = Job.objects.all().order_by('-date_created')
-    context_object_name = {'blog_posts':blog_posts, 'jobs':jobs}
+
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(jobs, 5)
+    try:
+        jobss = paginator.page(page)
+    except PageNotAnInteger:
+        jobss = paginator.page(1)
+    except EmptyPage:
+        jobss = paginator.page(paginator.num_pages)
+
+    context_object_name = {'blog_posts':blog_posts, 'jobss':jobss}
     return render(request, 'pages/index.html', context_object_name)
 
 
@@ -76,7 +88,7 @@ def CompaniesList(request):
     return render(request, 'pages/companies.html', {'companies': companies})
 
 
-def SingleCompanyDetail(request, pk):
-    company = get_object_or_404(Company, pk=pk)
+def SingleCompanyDetail(request, pk, slug):
+    company = get_object_or_404(Company, pk=pk, slug=slug)
     return render(request, 'pages/company-single.html', {'company':company})
 

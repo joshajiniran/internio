@@ -14,15 +14,15 @@
         {% for company in companies %}
           <div class="col-md-3 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
-              <a href="{% url 'company-detail' company.id %}" class="block-20" style="background-image: url({{ company.company_company_image.url }});">
+              <a href="{% url 'company-detail' company.id company.slug %}" class="block-20" style="background-image: url({{ company.company_company_image.url }});">
               </a>
               <div class="text mt-3">
               	<div class="meta mb-2">
-                  <div><a href="{% url 'company-detail' company.id %}">{{ company.company_date_created }}</a></div>
-                  <div><a href="{% url 'company-detail' company.id %}">{{ company.company_location }}</a></div>
-                  <div><a href="{% url 'company-detail' company.id %}" class="meta-chat"><span class="icon-chat"></span></a></div>
+                  <div><a href="{% url 'company-detail' company.id company.slug %}">{{ company.company_date_created }}</a></div>
+                  <div><a href="{% url 'company-detail' company.id company.slug %}">{{ company.company_location }}</a></div>
+                  <div><a href="{% url 'company-detail' company.id company.slug %}" class="meta-chat"><span class="icon-chat"></span></a></div>
                 </div>
-                <h3 class="heading"><a href="{% url 'company-detail' company.id %}">{{ company.company_name }}</a></h3>
+                <h3 class="heading"><a href="{% url 'company-detail' company.id company.slug %}">{{ company.company_name }}</a></h3>
                {% comment %} <p>{{ blog_post.body }}</p> {% endcomment %}
               </div>
             </div>

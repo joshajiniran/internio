@@ -59,6 +59,7 @@ class Category(models.Model):
 
 class Company(models.Model):
     company_name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=200, unique=True, null=False)
     company_phone = models.CharField(max_length=13)
     company_email = models.CharField(max_length=100)
     company_location = models.CharField(max_length=100)

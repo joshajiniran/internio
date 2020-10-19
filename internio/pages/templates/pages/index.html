@@ -226,7 +226,7 @@
       </div>
     </div>
     <div class="row">
-        {% for job in jobs %}    
+        {% for job in jobss %}    
           <div class="col-md-12 ftco-animate">
 
             <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
@@ -239,7 +239,7 @@
                   </div>
                 </div>
                 <div class="job-post-item-body d-block d-md-flex">
-                  <div class="mr-3"><span class="icon-layers"></span> <a href="#">{{ job.company }}</a></div>
+                  <div class="mr-3"><span class="icon-layers"></span> <a href="{% url 'company-detail' job.company.id job.company.slug %}">{{ job.company }}</a></div>
                   <div><span class="icon-my_location"></span> <span>{{ job.location }}</span></div>
                 </div>
                 </div>
@@ -258,15 +258,32 @@
             <div class="row mt-5">
       <div class="col text-center">
         <div class="block-27">
-          <ul>
-            <li><a href="#">&lt;</a></li>
-            <li class="active"><span>1</span></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&gt;</a></li>
-          </ul>
+        {% if jobss.has_other_pages %}
+          <ul class="pagination">
+            {% if jobss.has_previous %}
+               <li><a href="?page={{ jobss.previous_page_number }}">&lt;</a></li>
+            {% else %}
+              <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+
+            {% for i in jobss.paginator.page_range %}
+              {% if jobss.number == i %}
+                <li class="active"><span>{{ i }}</span></li>
+              {% else %}
+                <li><a href="?page={{ i }}">{{i}}</a></li>
+              {% endif %}
+            {% endfor %}
+
+            {% if jobss.has_next %}
+              <li><a href="?page={{ jobss.next_page_number }}">&gt;</a></li>
+            {% else %}
+              <li class="disabled"><span>&gt;</span></li>
+            {% endif %}
+        </ul>
+        {% endif %}
+            
+            
+          
         </div>
       </div>
     </div>

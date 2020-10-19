@@ -81,6 +81,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class CompanyAdmin(admin.ModelAdmin):
     list_display = (
         'company_name',
+        'slug',
         'company_phone',
         'company_email',
         'company_location',
@@ -91,7 +92,7 @@ class CompanyAdmin(admin.ModelAdmin):
 
     list_filter = ('company_name', 'company_email', 'company_location', 'company_date_created', 'verified')
     search_fields = ('company_name', 'company_email', 'company_location', 'company_date_created', 'verified')
-
+    prepopulated_fields = {'slug':['company_name',]}   
     actions = ['verify_company']
 
 
