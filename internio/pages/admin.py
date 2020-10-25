@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contact, Job, EmailSubscription, BlogPost, Category, Company
+from .models import Contact, Job, EmailSubscription, BlogPost, Category, Company, Comment
 # Register your models here.
 
 @admin.register(Contact)
@@ -52,8 +52,9 @@ class BlogPostAdmin(admin.ModelAdmin):
         'author',
         'feature_image',
         'created_on',
-        'comments_count',
-        'status'
+        'comments_count', 
+        'status',
+        # 'tags',
     )
     list_filter = ('title', 'author', 'created_on')
     search_fields = ('title', 'body', 'author', 'created_on')
@@ -100,4 +101,19 @@ class CompanyAdmin(admin.ModelAdmin):
         queryset.update(verified=True)
 
 
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = (
+        'post',
+        'author',
+        'email',
+        'body',
+        'created_on',
+        'active'
+    )
+    list_filter = ('active', 'created_on')
+    search_fields = ('author', 'email', 'body')
+    actions = ['approve_comments']
 
+    def approve_comments(self, request, queryset):
+        queryset.update(active=True)

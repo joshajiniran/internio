@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+#from taggit.managers import TaggableManager
 # Create your models here.
 CATEGORIES = (
     ('fulltime', 'Full Time'),
@@ -93,6 +94,7 @@ class BlogPost(models.Model):
     created_on = models.DateField(auto_now_add=True)
     comments_count = models.IntegerField()
     status = models.IntegerField(choices=POST_STATUS, default=0)
+    #tags = TaggableManager()
     
     class Meta:
         ordering = ['-created_on']     
@@ -102,5 +104,19 @@ class BlogPost(models.Model):
 
 
 
+class Comment(models.Model):
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    email = models.EmailField()
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ['created_on']
+
+    def __str__(self):
+        return 'Comment {} by {}'.format(self.body, self.author)
+
+    
 

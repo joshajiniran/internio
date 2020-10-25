@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views import generic
+from django.template.defaultfilters import slugify
 from django.contrib import messages
 from .models import Contact, Job, BlogPost, Company
 from .forms import ContactForm, JobForm, EmailSubscriptionForm
@@ -57,11 +58,13 @@ def BlogPage(request):
 def SingleBlogPost(request, slug):
     blog_post = get_object_or_404(BlogPost, slug=slug)
     recents = BlogPost.objects.filter(status=1).order_by('-created_on')[:3]
+    #common_tags = BlogPost.tags.all()[:4]
 
     return render(request, 'pages/blog-single.html', {'blog_post':blog_post, 'recents': recents})
 def SingleJob(request, pk):
     job = get_object_or_404(Job, pk=pk)
     return render(request, 'pages/job-single.html', {'job':job})
+    
 def NewPost(request):
     if request.method == "POST":
         form = JobForm(request.POST)
@@ -92,3 +95,16 @@ def SingleCompanyDetail(request, pk, slug):
     company = get_object_or_404(Company, pk=pk, slug=slug)
     return render(request, 'pages/company-single.html', {'company':company})
 
+# def NewBlogPost(request):
+#     if request == "POST":
+#         form = BlogPostForm(request.POST)
+#         if form.is_valid():
+#             newblogpost = form.save(commit=False)
+#             newblogpost.slug = slugify(newblogpost.title)
+#             newblogpost.save()
+#             #Now save the tags..
+#             form.save_m2m()
+#             context = {
+#                 'form':form,
+#             }
+#             return render(request, 'pages/newblogpost.html', context)
