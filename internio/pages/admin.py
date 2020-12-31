@@ -28,8 +28,8 @@ class JobAdmin(admin.ModelAdmin):
         'date_created'
     )
 
-    list_filter = ('company', 'location', 'date_created')
-    search_fields = ('title', 'job_type', 'location', 'description')
+    list_filter = ('company', 'location', 'category', 'date_created')
+    search_fields = ('title', 'job_type', 'category__title', 'location', 'description')
 
 @admin.register(EmailSubscription)
 class EmailSubscriptionAdmin(admin.ModelAdmin):

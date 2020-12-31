@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'taggit',
+    'crispy_forms',
     # The following apps are required:
     'allauth',
     'allauth.account',
@@ -146,3 +147,9 @@ STATICFILES_DIR = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGIN_REDIRECT_URL = 'homepage'
+
+ACCOUNT_FORMS = {'signup': 'pages.forms.MyCustomSignupForm'}
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

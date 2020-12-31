@@ -1,6 +1,8 @@
 from django.forms import ModelForm, TextInput, Textarea, RadioSelect, Select, FileInput   
 from django import forms
 from .models import Contact, Job, EmailSubscription, BlogPost
+from allauth.account.forms import SignupForm
+
 
 
 
@@ -60,6 +62,22 @@ class JobForm(ModelForm):
 #             'status',
 #             'tags',
 #         ]
+
+
+class MyCustomSignupForm(SignupForm):
+    def __init__(self, *args, **kwargs):
+        super(MyCustomSignupForm, self).__init__(*args, **kwargs)
+        self.fields['organization'] = forms.CharField(required=True)
+        self.fields['github'] = forms.URLField(required=True)
+        self.fields['linkedin'] = forms.URLField(required=True)
+        
+    def save(self, request):
+        organization = self.cleaned_data.pop('organization')
+        github = self.cleaned_data.pop('github')
+        linkedin = self.cleaned_data.pop('linkedin')
+        ...
+        user = super(MyCustomSignupForm, self).save(request, commit=True)
+        return user
         
 
 

@@ -21,10 +21,11 @@
             <h5>Job Type: {{ job.job_type.upper }}</h5>
             <p>{{ job.description }}</p>
             
+            <a href="{% url 'job-detail' job.id %}" class="btn btn-primary py-2 mr-1">Send your CV</a>
             <div class="tag-widget post-tag-container mb-5 mt-5">
               <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">Life</a>
-                <a href="#" class="tag-cloud-link">Sport</a>
+                <a href="#" class="tag-cloud-link">{{ job.category }}</a>
+                <a href="#" class="tag-cloud-link">Internships</a>
                 <a href="#" class="tag-cloud-link">Tech</a>
                 <a href="#" class="tag-cloud-link">Travel</a>
               </div>
@@ -117,12 +118,11 @@
             <div class="sidebar-box ftco-animate">
               <div class="categories">
                 <h3>Categories</h3>
-                <li><a href="#">Jobs <span>(12)</span></a></li>
-                <li><a href="#">Visual Assistant <span>(22)</span></a></li>
-                <li><a href="#">Coffee <span>(37)</span></a></li>
-                <li><a href="#">Drinks <span>(42)</span></a></li>
-                <li><a href="#">Foods <span>(14)</span></a></li>
-                <li><a href="#">Travel <span>(140)</span></a></li>
+
+                {% for category in categories %}
+                <li><a href="#">{{ category.title }}<span>20</span></a></li>
+                
+                {% endfor %}
               </div>
             </div>
 
@@ -148,14 +148,10 @@
             <div class="sidebar-box ftco-animate">
               <h3>Tag Cloud</h3>
               <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">dish</a>
-                <a href="#" class="tag-cloud-link">menu</a>
-                <a href="#" class="tag-cloud-link">food</a>
-                <a href="#" class="tag-cloud-link">sweet</a>
-                <a href="#" class="tag-cloud-link">tasty</a>
-                <a href="#" class="tag-cloud-link">delicious</a>
-                <a href="#" class="tag-cloud-link">desserts</a>
-                <a href="#" class="tag-cloud-link">drinks</a>
+                <a href="#" class="tag-cloud-link">{{ job.category }}</a>
+                <a href="#" class="tag-cloud-link">Internships</a>
+                <a href="#" class="tag-cloud-link">Tech</a>
+                <a href="#" class="tag-cloud-link">Travel</a>
               </div>
             </div>
 

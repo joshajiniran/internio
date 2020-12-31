@@ -27,13 +27,13 @@
                     <div class="tab-content p-4" id="v-pills-tabContent">
 
                       <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
-                          <form action="#" class="search-job">
+                          <form action="{% url 'homepage' %}" class="search-job">
                               <div class="row">
                                   <div class="col-md">
                                       <div class="form-group">
                                           <div class="form-field">
                                               <div class="icon"><span class="icon-briefcase"></span></div>
-                                            <input type="text" class="form-control" placeholder="eg. Garphic. Web Developer">
+                                            <input type="text" class="form-control" name="search" placeholder="eg. Garphic. Web Developer">
                                           </div>
                                       </div>
                                   </div>
@@ -42,13 +42,16 @@
                                           <div class="form-field">
                                               <div class="select-wrap">
                                           <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                          <select name="" id="" class="form-control">
-                                              <option value="">Category</option>
-                                              <option value="">Full Time</option>
-                                            <option value="">Part Time</option>
-                                            <option value="">Freelance</option>
-                                            <option value="">Internship</option>
-                                            <option value="">Temporary</option>
+                                          <select name="search" id="" class="form-control">
+                                            <option value="">Category</option>
+                                            {% comment %} <option value="fulltime">Full Time</option>
+                                            <option value="fulltime">Part Time</option>
+                                            <option value="freelance">Freelance</option>
+                                            <option value="internship">Internship</option>
+                                            <option value="temporary">Temporary</option> {% endcomment %}
+                                            {% for category in categories %}
+                                                <option value="{{ category }}">{{ category }}</option>
+                                            {% endfor %}
                                           </select>
                                         </div>
                                           </div>
@@ -58,7 +61,7 @@
                                       <div class="form-group">
                                           <div class="form-field">
                                               <div class="icon"><span class="icon-map-marker"></span></div>
-                                            <input type="text" class="form-control" placeholder="Location">
+                                            <input type="text" name="search" class="form-control" placeholder="Location">
                                           </div>
                                       </div>
                                   </div>
