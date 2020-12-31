@@ -12,4 +12,5 @@ urlpatterns = [
     path('companies', views.CompaniesList, name='companies'),
     path('companies/<int:pk>/<slug:slug>/', views.SingleCompanyDetail, name='company-detail'),
     path('accounts/profile/<int:user_id>', views.GetUserProfile, name='myprofile'),
+    path('jobs/tags/category/<int:pk>/', views.GetSingleCategory, name='categorydetail'),
 ]

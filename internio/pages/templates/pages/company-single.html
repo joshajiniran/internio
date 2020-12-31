@@ -18,8 +18,44 @@
                             <p><a href="{% url 'company-detail' company.id company.slug %}" class="block-20" style="background-image: url({{ company.company_company_image.url }});"></a>
                             
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa ad iure porro mollitia architecto hic consequuntur. Distinctio nisi perferendis dolore, ipsa consectetur</p>
-                            
+                            <h2>Latest Postings</h2>
+                            <p>
+                            {% for job in jobs %}    
+                                <div class="col-md-12 ftco-animate">
+
+                                    <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
+
+                                        <div class="mb-4 mb-md-0 mr-5">
+                                        <div class="job-post-item-header d-flex align-items-center">
+                                        <h2 class="mr-3 text-black h4">{{ job.title }}</h2>
+                                        <div class="badge-wrap">
+                                            <span class="bg-secondary text-white badge py-2 px-3" id="job_type">{{ job.job_type }}</span>
+                                        </div>
+                                        </div>
+                                        <div class="job-post-item-body d-block d-md-flex">
+                                        <div class="mr-3"><span class="icon-layers"></span> <a href="{% url 'company-detail' job.company.id job.company.slug %}">{{ job.company }}</a></div>
+                                        <div><span class="icon-my_location"></span> <span>{{ job.location }}</span></div>
+                                        </div>
+                                        </div>
+
+                                        <div class="ml-auto d-flex">
+                                        <a href="{% url 'job-detail' job.id %}" class="btn btn-primary py-2 mr-1">Apply</a>
+                                        <a href="#" class="btn btn-secondary rounded-circle btn-favorite d-flex align-items-center icon">
+                                            <span class="icon-heart"></span>
+                                        </a>
+                                        </div>
+                                    </div>
+                                    </div>
+                             {% endfor %}
+                             </p>
+
+
+
+
+
                         </div>
+
+                        
                 
                         <div class="col-lg-4">
                             <div class="p-4 mb-3 bg-white">

@@ -106,7 +106,8 @@ class BlogPost(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='comments')
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    #author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    author = models.CharField(max_length=155, null=True, default='Anonymous')
     email = models.EmailField()
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
