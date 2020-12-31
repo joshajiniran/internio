@@ -1,6 +1,6 @@
 from django.forms import ModelForm, TextInput, Textarea, RadioSelect, Select, FileInput   
 from django import forms
-from .models import Contact, Job, EmailSubscription, BlogPost
+from .models import Comment, Contact, Job, EmailSubscription, BlogPost
 from allauth.account.forms import SignupForm
 
 
@@ -78,6 +78,21 @@ class MyCustomSignupForm(SignupForm):
         ...
         user = super(MyCustomSignupForm, self).save(request, commit=True)
         return user
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('author', 'email', 'body')
+
+        widgets = {
+            'author': TextInput(attrs = {'id':'name', 'class':'form-control'}),
+            'email': TextInput(attrs = {'id':'email', 'class':'form-control'}),
+            'body': Textarea(attrs = {'id':'message', 'class':'form-control', 'cols':'30', 'rows':'10'}),
+        }
+
+
+
         
 
 
