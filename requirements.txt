@@ -1,0 +1,5 @@
+django = "*"
+django-taggit = "*"
+django-allauth = "*"
+django-crispy-forms = "*"
+pillow = "*"
