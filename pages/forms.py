@@ -32,7 +32,11 @@ class ContactForm(ModelForm):
 class JobForm(ModelForm):
     class Meta:
         model = Job
+<<<<<<< HEAD
         fields = ('title', 'company', 'category', 'job_type', 'location', 'job_company_image', 'description')
+=======
+        fields = ('title', 'company', 'category', 'job_type', 'location', 'description', 'job_company_image')
+>>>>>>> bce7ba72f5868915c4a8202b46298b29d78ffe0c
 
         widgets = {
             'title': TextInput(attrs = {'id':'fullname', 'class':'form-control', 'placeholder':'eg. Professional UI/UX Designer'}),
@@ -40,8 +44,13 @@ class JobForm(ModelForm):
             'category': Select(attrs ={'id':'jobcategory', 'class':'form-control'}),
             'job_type': RadioSelect(attrs = {'id':'option-job-type-1', 'class':'', 'name':'job-type'}),
             'location': TextInput(attrs = {'id':'', 'class':'form-control', 'placeholder':'Western City, UK'}),
+<<<<<<< HEAD
             'job_company_image': FileInput(attrs = {'id':'image', 'class':'form-control'}),
             'description': Textarea(attrs = {'id':'', 'class':'form-control', 'cols':'30', 'rows':'5'}),
+=======
+            'description': Textarea(attrs = {'id':'', 'class':'form-control', 'cols':'30', 'rows':'5'}),
+            'job_company_image': FileInput(attrs = {'id':'image', 'class':'form-control'}),
+>>>>>>> bce7ba72f5868915c4a8202b46298b29d78ffe0c
         }
 
         # default_data = {
