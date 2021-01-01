@@ -32,10 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'pages.apps.PagesConfig',
-<<<<<<< HEAD
-=======
     # 'accounts.apps.AccountsConfig',
->>>>>>> bce7ba72f5868915c4a8202b46298b29d78ffe0c
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,10 +48,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
-<<<<<<< HEAD
-
-=======
->>>>>>> bce7ba72f5868915c4a8202b46298b29d78ffe0c
 ]
 
 SITE_ID = 1
@@ -164,8 +157,5 @@ LOGIN_REDIRECT_URL = 'homepage'
 ACCOUNT_FORMS = {'signup': 'pages.forms.MyCustomSignupForm'}
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-<<<<<<< HEAD
-=======
 
 # AUTH_USER_MODEL = 'accounts.CustomUser'
->>>>>>> bce7ba72f5868915c4a8202b46298b29d78ffe0c
