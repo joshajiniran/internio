@@ -37,8 +37,8 @@ class Job(models.Model):
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     job_type = models.CharField(max_length=100, choices=CATEGORIES, default="Permanent")
     location = models.CharField(max_length=100)
-    description = models.TextField()
     job_company_image = models.FileField(upload_to='gallery/job-cover-images', null=True)
+    description = models.TextField()
     date_created = models.DateField(auto_now_add=True)
 
     class Meta:

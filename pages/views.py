@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views import generic
@@ -7,7 +8,7 @@ from django.contrib import messages
 from .models import Contact, Job, BlogPost, Company, Category
 from .forms import CommentForm, ContactForm, JobForm, EmailSubscriptionForm
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 import random
 from django.db.models import Q
 # Create your views here.
@@ -96,12 +97,12 @@ def NewPost(request):
     if request.method == "POST":
         form = JobForm(request.POST)
         if form.is_valid():
-            form.save(commit=True)
-            messages.success(request, 'Job Created Successfully', extra_tags='alert alert-success')
+            form.save()
             return redirect('homepage')
+            messages.success(request, 'Job Created Successfully', extra_tags='alert alert-success')
     else:
-        form = JobForm()
-    return render(request, 'pages/newpost.html', {'title':'Post a Job', 'form':form})
+       form = JobForm()
+       return render(request, 'pages/newpost.html', {'title':'Post a Job', 'form':form})
     # if request.method == "POST":
     #     form = JobForm(request.POST)
     #     if form.is_valid():
