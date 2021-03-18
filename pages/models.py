@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from internio import settings
 # from taggit.managers import TaggableManager
 # Create your models here.
 CATEGORIES = (
@@ -97,7 +98,7 @@ class BlogPost(models.Model):
     slug = models.SlugField(max_length=200, unique=True, null=False)
     body = models.TextField()
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='blog_posts')
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='blog_posts')
     feature_image = models.FileField(upload_to='gallery/', null=True)
     created_on = models.DateField(auto_now_add=True)
     comments_count = models.IntegerField()
@@ -139,7 +140,7 @@ class Profile(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     birthdate = models.DateField()
     user = models.OneToOneField(
-        User, on_delete=models.CASCADE, related_name="user_profile")
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user_profile")
 
     def __str__(self):
         return f'Profile - {self.user.username}'

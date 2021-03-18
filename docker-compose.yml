@@ -16,9 +16,6 @@ services:
       - DATABASE_PORT=${DB_PORT}
       - DATABASE_URL=${DB_URL}/internioDB
       - DATABASE_TEST_URL=${DB_URL}/internioDB_test
-      - S3_BUCKET_NAME=${S3_BUCKET_NAME}
-      - S3_ACCESS_KEY=${S3_ACCESS_KEY}
-      - S3_SECRET_ACCESS_KEY=${S3_SECRET_ACCESS_KEY}
       - SECRET_KEY='020ncj_8a8622tmsp_pslr)!cst#5#peat0&$zaw2s8((a+w7e'
       - REDIS_HOST=redis
       - REDIS_PORT=6379
