@@ -1,0 +1,49 @@
+version: "3.7"
+
+services:
+  internio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: internio
+    ports:
+      - 8000:8000
+    restart: always
+    environment:
+      - DJANGO_SETTINGS_MODULE=internio.settings
+      - DEBUG=True
+      - DATABASE_HOST=${DB_HOST}
+      - DATABASE_PORT=${DB_PORT}
+      - DATABASE_URL=${DB_URL}/internioDB
+      - DATABASE_TEST_URL=${DB_URL}/internioDB_test
+      - SECRET_KEY='020ncj_8a8622tmsp_pslr)!cst#5#peat0&$zaw2s8((a+w7e'
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - db
+    links:
+      - db
+
+  db:
+    container_name: db
+    image: postgres:12.6-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PSWD}
+    ports:
+      - 5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  pgdata:

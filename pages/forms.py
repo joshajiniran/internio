@@ -1,7 +1,13 @@
 from django.forms import ModelForm, TextInput, Textarea, RadioSelect, Select, FileInput
 from django import forms
-from .models import Comment, Contact, Job, EmailSubscription, BlogPost
+
 from allauth.account.forms import SignupForm
+
+from .models import (
+    Comment, BlogPost,
+    Contact, Job, EmailSubscription,
+    Profile
+)
 
 
 class EmailSubscriptionForm(forms.Form):
@@ -14,7 +20,7 @@ class EmailSubscriptionForm(forms.Form):
     #         }
 
 
-class ContactForm(ModelForm):
+class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
         fields = ('name', 'email', 'subject', 'message')
@@ -26,7 +32,9 @@ class ContactForm(ModelForm):
         }
 
 
+
 class JobForm(ModelForm):
+  
     class Meta:
         model = Job
         fields = ('title', 'company', 'category', 'job_type',
@@ -47,7 +55,7 @@ class JobForm(ModelForm):
         #     }
 
 
-# class BlogPostForm(ModelForm):
+# class BlogPostForm(forms.ModelForm):
 #     class Meta:
 #         model = BlogPost
 
@@ -78,7 +86,13 @@ class MyCustomSignupForm(SignupForm):
         return user
 
 
-class CommentForm(ModelForm):
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = '__all__'
+
+
+class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('author', 'email', 'body')
