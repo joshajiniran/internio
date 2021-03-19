@@ -1,4 +1,4 @@
-from django.forms import TextInput, Textarea, RadioSelect, Select, FileInput
+from django.forms import ModelForm, TextInput, Textarea, RadioSelect, Select, FileInput
 from django import forms
 
 from allauth.account.forms import SignupForm
@@ -32,7 +32,9 @@ class ContactForm(forms.ModelForm):
         }
 
 
-class JobForm(forms.ModelForm):
+
+class JobForm(ModelForm):
+  
     class Meta:
         model = Job
         fields = ('title', 'company', 'category', 'job_type',

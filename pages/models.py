@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from internio import settings
 # from taggit.managers import TaggableManager
 # Create your models here.
+
+
 CATEGORIES = (
     ('fulltime', 'Full Time'),
     ('parttime', 'Part Time'),
